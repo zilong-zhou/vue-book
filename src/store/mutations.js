@@ -1,6 +1,10 @@
+import router from '../router/router'
+
 export default {
+
   editableTabs: (state, obj) => {
     // 浅拷贝 state.tabsPage
+    console.log(state, obj);
     let arr = Array.from(state.tabsPage);
     // 判断数组内是否为空
     if (arr.length !== 0) {
@@ -17,27 +21,34 @@ export default {
         arr.push({ title: obj.name, name: obj.path });
         // 赋值给tabsPage参数
         state.tabsPage = arr;
+        window.sessionStorage.setItem("tabsPage", JSON.stringify(arr));
+        window.sessionStorage.setItem("TabsValue", obj.path)
         // 赋值给TabsValue参数
         state.TabsValue = obj.path;
         // 跳转
-        this.$router.push({ name: obj.path });
-      } else { // 如果存在 只做跳转选中
+        router.push({ name: obj.path });
+      } else {
+        // 如果存在 只做跳转选中
         // 赋值给TabsValue参数
         state.TabsValue = obj.path;
+        window.sessionStorage.setItem("TabsValue", obj.path);
         // 跳转
-        this.$router.push({ name: obj.path });
+        router.push({ name: obj.path });
       }
-    } else {// 如果为0
+    } else {
+      // 如果为0
       // 将tabs所需参数push进arr数组
       arr.push({
-        title: obj.name, name: obj.path
+        title: obj.name,
+        name: obj.path
       });
       // 赋值给tabsPage参数
       state.tabsPage = arr;
       // 赋值给TabsValue参数
       state.TabsValue = obj.path;
       // 跳转
-      this.$router.push({ name: obj.path });
+      router.push({ name: obj.path });
+
     }
   }
 }

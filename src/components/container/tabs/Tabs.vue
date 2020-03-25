@@ -8,7 +8,7 @@
       <el-tab-pane
               :key="item.id"
               v-for="item in editableTabs"
-              :label="item.name"
+              :label="item.title"
               :name="item.name">
       </el-tab-pane>
     </el-tabs>
@@ -44,6 +44,9 @@
       removeTab(targetName) {
         let tabs = this.editableTabs;
         let activeName = this.editableTabsValue;
+        if (targetName == "/home") {
+          return false;
+        }
         if (activeName === targetName) {
           tabs.forEach((tab, index) => {
             if (tab.name === targetName) {
@@ -64,6 +67,17 @@
         //写一个点击tabs跳转
         this.$router.push({name: event.name});
       },
+    },
+    mounted() {
+      console.log(sessionStorage.getItem("tabsPage"));
+      if (sessionStorage.getItem("tabsPage")) {
+        this.$store.state.tabsPage = JSON.parse(
+          sessionStorage.getItem("tabsPage")
+        );
+        var TabsValue = sessionStorage.getItem("TabsValue");
+        this.$store.state.TabsValue = TabsValue;
+        this.$router.push({ name: TabsValue });
+      }
     }
   }
 </script>

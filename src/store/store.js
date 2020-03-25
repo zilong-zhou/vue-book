@@ -9,7 +9,7 @@ Vue.use(Vuex)
 
 const state = {
   isCollapse: false,
-  tabsPage: [], //定义tabs 所需参数
+  tabsPage: [{title: '首页', name: '/home'}], //定义tabs 所需参数
   TabsValue: ''
 }
 

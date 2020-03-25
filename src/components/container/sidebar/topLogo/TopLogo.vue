@@ -1,7 +1,7 @@
 <template>
   <div class="top-container">
     <a href="#">
-      <img src="~assets/logo.png" class="aside-logo">
+      <img src="~assets/img/logo/logo.png" class="aside-logo">
       <h1 class="aside-title">图书管理系统</h1>
     </a>
   </div>

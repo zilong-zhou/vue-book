@@ -5,11 +5,7 @@ module.exports = [
     icon: 'el-icon-mouse',
     name: '首页',
     path: '/home',
-    submenu: [{
-      id: '1-1',
-      name: '首页',
-      path: '/home'
-    }]
+    submenu: []
   },
   {
     id: '2',

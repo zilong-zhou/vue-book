@@ -8,22 +8,29 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '',
+    path: '/',
     redirect: '/home'
   },
   {
     path: '/home',
+    name: '/home',
     component: Home
   },
   {
     path: '/bookinfo',
+    name: '/bookinfo',
     component: BookInfo
   }
 ]
 
 const router = new VueRouter({
   routes,
-  modal: 'history'
-})
+  mode: 'history'
+});
+
+const routerPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error => error);
+};
 
 export default router

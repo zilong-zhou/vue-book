@@ -7,10 +7,24 @@
           :collapse-transition="false"
           unique-opened
           router
-          :default-active="this.$router.name"
+          :default-active="isActive"
           >
+    <div  v-for="item in menu" :key="item.id">
+      <!--{title: item.name, name: item.path}-->
+    <el-menu-item
+            :index="item.path+''"
+            @click="handleOpen2(item)"
+            v-if="item.submenu.length == 0">
+      <template slot="title">
+        <!--图标-->
+        <i :class="item.icon"></i>
+        <!--文本-->
+        <span>{{item.name}}</span>
+      </template>
+    </el-menu-item>
+
     <!--一级菜单-->
-    <el-submenu :index="item.path+''" v-for="item in menu" :key="item.id">
+    <el-submenu :index="item.path+''" v-if="item.submenu.length !== 0">
       <!--一级菜单的模板区域-->
       <template slot="title" >
         <!--图标-->
@@ -19,7 +33,11 @@
         <span><b>{{item.name}}</b></span>
       </template>
       <!--二级菜单-->
-      <el-menu-item  :index="sub.path+''" v-for="sub in item.submenu" :key="sub.id" @click="handleOpen2(sub)">
+      <el-menu-item
+              :index="sub.path+''"
+              v-for="sub in item.submenu"
+              :key="sub.id"
+              @click="handleOpen2(sub)">
         <template slot="title">
           <!--图标-->
           <i :class="sub.icon"></i>
@@ -29,6 +47,7 @@
       </el-menu-item>
     </el-submenu>
 
+    </div>
   </el-menu>
 </template>
 
@@ -39,7 +58,7 @@
     name: "SidebarItem",
     data() {
       return {
-        menu: menu
+        menu: menu,
       }
     },
     computed: {
@@ -47,8 +66,7 @@
         return this.$store.state.isCollapse;
       },
       isActive() {
-        // return this.$route.path
-        return this.$router.name
+        return this.$route.path
       }
     },
     methods: {

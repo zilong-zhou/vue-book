@@ -10,12 +10,9 @@
       </el-header>
       <!--主要区域容器-->
       <el-main>
-       <!--<router-view/>-->
         <!--tabs-->
         <tabs/>
       </el-main>
-      <!--底部容器-->
-      <el-footer>Footer</el-footer>
     </el-container>
   </el-container>
 </template>
@@ -47,6 +44,5 @@
   .el-main {
     background-color: #f5f2f5;
   }
-
 
 </style>
